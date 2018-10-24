@@ -1,6 +1,6 @@
 package com.SpringProject.demo.Security;
 
-import com.SpringProject.demo.UserInfoRepository;
+import com.SpringProject.demo.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,10 +25,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomAuthentification customAuthentification;
 
-    static UserInfoRepository userInfoRepository;
+    static UserRepository userRepository;
 
-    public static void Init(UserInfoRepository userInfoRepository) {
-        WebSecurityConfig.userInfoRepository = userInfoRepository;
+    public static void Init(UserRepository userRepository) {
+        WebSecurityConfig.userRepository = userRepository;
     }
 
     @Override
