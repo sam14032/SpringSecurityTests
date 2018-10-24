@@ -24,6 +24,8 @@ public class User implements UserDetails {
 
 	private String password;
 
+	public User(){}
+
 	User(String username, String password) {
 		this.username = username;
 		this.password = password;

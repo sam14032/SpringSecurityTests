@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+		http.antMatcher("/api/**");
         http.authorizeRequests()
                 .antMatchers("/", "/home")
                 .permitAll()
@@ -47,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(HttpMethod.POST, "/register");
+		web.ignoring().antMatchers(HttpMethod.GET, "/users");
     }
 
     @Override
