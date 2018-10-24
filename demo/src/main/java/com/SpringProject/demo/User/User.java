@@ -20,12 +20,12 @@ public class User implements UserDetails {
 	@GeneratedValue
 	long id;
 
-	private String userName;
+	private String username;
 
 	private String password;
 
-	User(String userName, String password) {
-		this.userName = userName;
+	User(String username, String password) {
+		this.username = username;
 		this.password = password;
 	}
 
@@ -58,7 +58,7 @@ public class User implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return userName;
+		return username;
 	}
 
 	@Override
@@ -70,8 +70,8 @@ public class User implements UserDetails {
 		return id;
 	}
 
-	public void setUserName(String username) {
-		this.userName = username;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public void setPassword(String password) {

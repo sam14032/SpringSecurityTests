@@ -51,7 +51,7 @@ public class UserController {
 	ResponseEntity<?> replaceUser(@RequestBody User newUser, @PathVariable Long id) throws URISyntaxException {
 		User updatedUser = repository.findById(id)
 				.map(user -> {
-					user.setUserName(newUser.getUsername());
+					user.setUsername(newUser.getUsername());
 					user.setPassword(newUser.getPassword());
 					return repository.save(user);
 				}).orElseGet(() -> {
