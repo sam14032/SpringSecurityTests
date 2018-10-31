@@ -16,10 +16,7 @@ import java.util.List;
 @Entity
 public class User implements UserDetails {
 
-	private @Id
-	@GeneratedValue
-	long id;
-
+	@Id
 	private String username;
 
 	private String password;
@@ -28,7 +25,7 @@ public class User implements UserDetails {
 
 	User(String username, String password) {
 		this.username = username;
-		this.password = password;
+		this.password = passwordEncoder().encode(password);
 	}
 
 	@Override
@@ -68,20 +65,13 @@ public class User implements UserDetails {
 		return password;
 	}
 
-	public Long getId() {
-		return id;
-	}
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+		this.password = passwordEncoder().encode(password);
 	}
 
 	@Bean

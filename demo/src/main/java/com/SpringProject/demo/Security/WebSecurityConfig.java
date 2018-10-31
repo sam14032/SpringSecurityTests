@@ -1,6 +1,5 @@
 package com.SpringProject.demo.Security;
 
-import com.SpringProject.demo.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan
+@ComponentScan("com.SpringProject.demo.User")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -25,15 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomAuthentification customAuthentification;
 
-    static UserRepository userRepository;
-
-    public static void Init(UserRepository userRepository) {
-        WebSecurityConfig.userRepository = userRepository;
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-		http.antMatcher("/api/**");
         http.authorizeRequests()
                 .antMatchers("/", "/home")
                 .permitAll()
@@ -47,8 +39,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.POST, "/register");
-		web.ignoring().antMatchers(HttpMethod.GET, "/users");
+        web.ignoring().antMatchers(HttpMethod.POST,"/register/**");
+		web.ignoring().antMatchers(HttpMethod.POST,"/users/**");
+        web.ignoring().antMatchers(HttpMethod.GET,"/users/**");
+        web.ignoring().antMatchers(HttpMethod.PUT,"/users/**");
     }
 
     @Override

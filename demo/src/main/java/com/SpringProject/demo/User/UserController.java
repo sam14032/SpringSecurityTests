@@ -42,20 +42,20 @@ public class UserController {
 	}
 
 	@GetMapping("/users/{id}")
-	Resource<User> one(@PathVariable Long id) {
+	Resource<User> one(@PathVariable String id) {
 		User user = repository.findById(id).orElseThrow(UserNotFoundException::new);
 		return assembler.toResource(user);
 	}
 
 	@PutMapping("/users/{id}")
-	ResponseEntity<?> replaceUser(@RequestBody User newUser, @PathVariable Long id) throws URISyntaxException {
+	ResponseEntity<?> replaceUser(@RequestBody User newUser, @PathVariable String id) throws URISyntaxException {
 		User updatedUser = repository.findById(id)
 				.map(user -> {
 					user.setUsername(newUser.getUsername());
 					user.setPassword(newUser.getPassword());
 					return repository.save(user);
 				}).orElseGet(() -> {
-					newUser.setId(id);
+					newUser.setUsername(id);
 					return repository.save(newUser);
 				});
 
@@ -67,7 +67,7 @@ public class UserController {
 	}
 
 	@DeleteMapping("/users/{id}")
-	ResponseEntity<?> deleteUser(@PathVariable Long id) {
+	ResponseEntity<?> deleteUser(@PathVariable String id) {
 		repository.deleteById(id);
 
 		return ResponseEntity.noContent().build();

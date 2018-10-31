@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class CustomAuthentification implements AuthenticationProvider {
 
@@ -24,14 +26,15 @@ public class CustomAuthentification implements AuthenticationProvider {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        User userInfo = userRepository.getUserByUsername(username);
-        if (userInfo == null) {
+        Optional<User> userInfo = userRepository.findById(username);
+        User user = userInfo.get();
+        if (user == null) {
             throw new BadCredentialsException("Username not found");
         }
-        if (!password.equals(userInfo.getPassword())) {
+        if (!password.equals(user.getPassword())) {
             throw new BadCredentialsException("Username or Password is invalid");
         }
-        return new UsernamePasswordAuthenticationToken(username, passwordEncoder().encode(password), userInfo.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(username, passwordEncoder().encode(password), user.getAuthorities());
     }
 
     @Override

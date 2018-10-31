@@ -1,8 +1,7 @@
 package com.SpringProject.demo.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
 // This interface extends Spring Data JPA’s JpaRepository, specifying the
 // domain type as User and the id type as Long. This interface, though
@@ -11,8 +10,5 @@ import java.util.List;
 //		Updating existing ones
 //		Deleting
 //		Finding (one, all, by simple or complex properties)
-public interface UserRepository extends JpaRepository<User, Long> {
-	List<User> findByUsername(String username);
-
-	User getUserByUsername(String username);
+public interface UserRepository extends JpaRepository<User, String> {
 }
