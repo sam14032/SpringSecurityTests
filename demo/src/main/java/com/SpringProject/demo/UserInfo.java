@@ -63,7 +63,7 @@ public class UserInfo implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return passwordEncoder().encode(password);
     }
 
     @Override
