@@ -7,8 +7,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,12 +17,7 @@ import java.util.List;
 public class UserInfo implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @Column(name = "username")
-    @Qualifier
     private String username;
-    @Column(name = "password")
     private String password;
 
     public UserInfo() {
@@ -38,19 +31,7 @@ public class UserInfo implements UserDetails {
 
     @Override
     public String toString() {
-        return "ID : " + String.valueOf(id) + ", USER : " + username + ", PASSWORD : " + password;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
+        return "USER : " + username + ", PASSWORD : " + password;
     }
 
     @Override
@@ -73,10 +54,6 @@ public class UserInfo implements UserDetails {
         return true;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> auth = new ArrayList<>();
@@ -84,12 +61,14 @@ public class UserInfo implements UserDetails {
         return auth;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = passwordEncoder().encode(password);
+    @Override
+    public String getUsername() {
+        return username;
     }
 
 

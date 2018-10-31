@@ -1,4 +1,4 @@
-package com.SpringProject.demo.WebController;
+/*package com.SpringProject.demo.WebController;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -32,4 +32,4 @@ public class DefaultController {
     {
         return "/register";
     }
-}
+}*/

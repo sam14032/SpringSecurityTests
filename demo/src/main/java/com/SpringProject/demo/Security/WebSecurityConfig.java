@@ -25,12 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomAuthentification customAuthentification;
 
-    static UserInfoRepository userInfoRepository;
-
-    public static void Init(UserInfoRepository userInfoRepository) {
-        WebSecurityConfig.userInfoRepository = userInfoRepository;
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -46,7 +40,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.POST, "/register");
+
+        web.ignoring().antMatchers(HttpMethod.POST,"/register");
+        web.ignoring().antMatchers(HttpMethod.GET,"/register");
     }
 
     @Override

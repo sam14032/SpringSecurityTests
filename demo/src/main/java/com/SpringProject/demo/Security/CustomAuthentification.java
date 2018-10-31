@@ -3,6 +3,7 @@ package com.SpringProject.demo.Security;
 import com.SpringProject.demo.DatabaseCommand;
 import com.SpringProject.demo.UserInfo;
 import com.SpringProject.demo.UserInfoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -14,15 +15,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-@SpringBootApplication
 @Component
 public class CustomAuthentification implements AuthenticationProvider {
 
-    static UserInfoRepository userInfoRepository;
-
-    public static void config(UserInfoRepository userInfoRepository) {
-        CustomAuthentification.userInfoRepository = userInfoRepository;
-    }
+    @Autowired
+    UserInfoRepository userInfoRepository;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
