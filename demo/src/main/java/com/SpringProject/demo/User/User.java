@@ -23,7 +23,7 @@ public class User implements UserDetails {
 
 	public User(){}
 
-	User(String username, String password) {
+	public User(String username, String password) {
 		this.username = username;
 		this.password = passwordEncoder().encode(password);
 	}

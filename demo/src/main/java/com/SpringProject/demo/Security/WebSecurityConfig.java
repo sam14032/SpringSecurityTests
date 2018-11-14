@@ -40,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(HttpMethod.POST,"/register/**");
+        web.ignoring().antMatchers(HttpMethod.GET,"/register/**");
 		web.ignoring().antMatchers(HttpMethod.POST,"/users/**");
         web.ignoring().antMatchers(HttpMethod.GET,"/users/**");
         web.ignoring().antMatchers(HttpMethod.PUT,"/users/**");
