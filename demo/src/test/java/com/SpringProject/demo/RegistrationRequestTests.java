@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -32,7 +33,8 @@ import static org.mockito.Mockito.*;
 @WebMvcTest(UserController.class)
 @ContextConfiguration(classes = {TestContext.class, WebApplicationContext.class})
 @WebAppConfiguration
-public class DemoApplicationTests {
+@DataJpaTest
+public class RegistrationRequestTests {
 
     @Autowired
 
@@ -56,6 +58,17 @@ public class DemoApplicationTests {
 
     @Test
     public void addUserWhoDoesntExistInDB() {
+        when(registrationController.saveUserInfo(userInfo));
+        try {
+            this.mvc.perform(post("localhost:8080/register")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(SimpleJsonSerializer.toJson(userInfo)))
+                    .andExpect(status().isOk());
+            verify(registrationController,times(1)).saveUserInfo(userInfo);
+            verifyNoMoreInteractions(registrationController);
+        } catch (Exception exception) {
+
+        }
     }
 
     @Test
@@ -68,7 +81,7 @@ public class DemoApplicationTests {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(SimpleJsonSerializer.toJson(userInfo)))
                     .andExpect(status().isOk());
-            verify(registrationController,times(1)).saveUserInfo(userInfo);
+            verify(registrationController,times(2)).saveUserInfo(userInfo);
             verifyNoMoreInteractions(registrationController);
         } catch (Exception exception) {
 
