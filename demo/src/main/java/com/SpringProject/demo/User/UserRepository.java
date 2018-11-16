@@ -2,6 +2,7 @@ package com.SpringProject.demo.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 // This interface extends Spring Data JPA’s JpaRepository, specifying the
 // domain type as User and the id type as Long. This interface, though
