@@ -20,6 +20,4 @@ public class RegistrationController {
 		}
 		return HttpStatus.BAD_REQUEST;
 	}
-
-
 }
