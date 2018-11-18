@@ -3,7 +3,6 @@ package com.SpringProject.demo.Security;
 import com.SpringProject.demo.User.User;
 import com.SpringProject.demo.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
